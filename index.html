@@ -6,56 +6,41 @@
         <link rel="stylesheet" type="text/css" href="style.css" />
         <title>Big News Web</title>
     </head>
+
     <body>
-        <!-- <button onClick="getResponse('1,2')"></button> -->
-        <div class="filter-container">
-            <h2>Filter</h2>
-            <div class="sort-by-container">
-                <h4>Sort By:</h4>
-                <form action="#">
-                    <fieldset>
-                        <input id="most-viewed" type="radio" name="sort" value="viewed" onclick="" checked>
-                        <label for="most-viewed">Most Viewed</label>
-                        <input id="most-shared" type="radio" name="sort" value="shared" onclick="">
-                        <label for="most-shared">Most Shared</label>
-                        <input id="most-emailed" type="radio" name="sort" value="emailed" onclick="">
-                        <label for="most-emailed">Most Emailed</label>
-                    </fieldset>                    
-                </form>
+        <div class="main-container">
+            <div class="filter-container">
+                <h2>Filter</h2>
+                <div class="sort-by-container">
+                    <h4>Sort By:</h4>
+                    <form action="#">
+                        <fieldset>
+                            <input id="most-viewed" type="radio" name="sort" value="viewed" onclick="getResponse()">
+                            <label for="most-viewed">Most Viewed</label>
+                            <input id="most-shared" type="radio" name="sort" value="shared" onclick="getResponse()">
+                            <label for="most-shared">Most Shared</label>
+                            <input id="most-emailed" type="radio" name="sort" value="emailed" onclick="getResponse()">
+                            <label for="most-emailed">Most Emailed</label>
+                        </fieldset>                    
+                    </form>
+                </div>
+                <div class="time-frame-container">
+                    <h4>Time Frame:</h4>
+                    <form action="#">
+                        <fieldset>
+                            <input id="day" type="radio" name="time" value="1" onclick="getResponse()">
+                            <label for="day">Day</label>
+                            <input id="week" type="radio" name="time" value="7" onclick="getResponse()">
+                            <label for="week">Week</label>
+                            <input id="month" type="radio" name="time" value="30" onclick="getResponse()">
+                            <label for="month">Month</label>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
-            <div class="time-frame-container">
-                <h4>Time Frame:</h4>
-                <form action="#">
-                    <fieldset>
-                        <input id="day" type="radio" name="time" value="1" onclick="" checked>
-                        <label for="day">Day</label>
-                        <input id="week" type="radio" name="time" value="7" onclick="">
-                        <label for="week">Week</label>
-                        <input id="month" type="radio" name="time" value="30" onclick="">
-                        <label for="month">Month</label>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-        <div class="news-container">
-            <div id="one">
-                <h3>DJT</h3>
-            </div>
-            <div id="two">
-                <h3>World of Picture</h3>
-
-            </div>
-            <div id="three">
-                <h3>No one</h3>
-            </div>
-            <div id="four">
-                <h3>Trillion Cicadas</h3>
-            </div>
-            <div id="five">
-                <h3>Joses Andres</h3>
+            <div id="news-list" class="news-container">
             </div>
         </div>
-
         <script src="main.js"></script>
     </body>
 </html>

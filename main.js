@@ -1,25 +1,9 @@
+// need to add in .env for gitignore
 const APIKEY = 'R1SFw6AGGgQo6nn11qhj2s2kgSGZMS0e';
 
-const exLink = 'https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=R1SFw6AGGgQo6nn11qhj2s2kgSGZMS0e'
-
-async function getResponse(sortOption, periodOption) {
-    const response = await fetch(exLink);
-    const data = await response.json();
-    console.log(data);
-
-    const newsContainer = document.getElementsByClassName("news-container");
-
-    for (let i = 0; i < 5; ++i) {
-        // console.log(data.results[i]);
-        var ex_div = document.createElement("img");
-        ex_div.className = "ex-img";
-        ex_div.src = data.results[i].media;
-
-        
-        document.newsContainer.appendChild(ex_div);
-    }
-
-async function getResponse2() {
+// onClick from filter inputs
+async function getResponse() {
+    // get radio inputs from HTML
     sortRadioButtons = document.getElementsByName("sort");
     timeRadioButtons = document.getElementsByName("time");
 
@@ -41,6 +25,7 @@ async function getResponse2() {
         }
     }
 
+    // The link string for fetch
     let link = 'https://api.nytimes.com/svc/mostpopular/v2/'
             + sortValue 
             + '/' 
@@ -48,34 +33,52 @@ async function getResponse2() {
             + '.json?api-key=' 
             + APIKEY;
 
+    // fetch
     const response = await fetch(link);
-    const data = await response.json();
-    console.log(data);
+        const data = await response.json();
+        console.log(data);
 
+    // get news list div from HTML
+    const newsList = document.getElementById('news-list');
+
+    // clear news list div
+    newsList.innerHTML = '';
+
+    // append 5 articles to news list div
     for (let i = 0; i < 5; ++i) {
-        // console.log(data.results[i]);
-        var ex_div = document.createElement("img");
-        ex_div.className = "ex-img";
-        ex_div.src = data.results[i].media;
+        const news = data.results[i];
 
-        
-        document.newsContainer.appendChild(ex_div);
+        try {
+            const newsElement = createNewsElement(news);
+            newsElement.className = "news-element";
+            newsList.appendChild(newsElement);
+        } catch (error) {
+            console.error('error display', error);
+        }
     }
 }
     
-    // let url = 'https://api.nytimes.com/svc/mostpopular/v2/'
-    //         + sortOption 
-    //         + '/' 
-    //         + periodOption 
-    //         + '.json?api-key=' 
-    //         + APIKEY;
-    
-    // const response2 = await fetch(url);
-    // let array = [];
+// create HTML element for an article
+function createNewsElement(article) {
+    const articleElement = document.createElement('div');
+    articleElement.classList.add('article');
 
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = article.title;
 
-    // const data2 = await response2.json();
-    
+    const dateElement = document.createElement('p');
+    dateElement.textContent = article.published_date;
+
+    const imageElement = document.createElement('img');
+    imageElement.src = article.media[0]["media-metadata"][0].url;
+
+    const abstractElement = document.createElement('p');
+    abstractElement.textContent = article.abstract;
+
+    articleElement.appendChild(titleElement);
+    articleElement.appendChild(dateElement);
+    articleElement.appendChild(imageElement);
+    articleElement.appendChild(abstractElement);
+
+    return articleElement;
 }
-
-
